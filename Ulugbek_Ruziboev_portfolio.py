@@ -127,11 +127,43 @@ rejection_rate_df.reset_index(inplace=True)
 
 # Here 'Yes' would mean that I got rejection, whereas 'No' - went for an interview.
 
-rejection_rate_df.columns = ['Answer', 'Count']
+rejection_rate_df.columns = ['Rejection', 'Count']
 rejection_rate_df.head()
 
 
 # In[14]:
+
+
+#########################################################################################################################
+
+# After all of the preparation and dataframe creation steps we are finally coming the interpretation part.
+# Here we go!
+
+#########################################################################################################################
+
+
+# In[15]:
+
+
+# Hereby I am extracting current datetime to further include it to create appropriate filenames and etc.
+
+from datetime import datetime
+
+now = datetime.now()
+current_time = now.strftime("%d.%m.%Y")
+
+
+# In[16]:
+
+
+# The first interesting insight follows.
+
+display('Until {time} I have applied for {job} vacant positions in {industry} industries'.format(time=current_time, 
+                                                                                          job=len(df.index), 
+                                                                                          industry=len(df.Industry.unique())))
+
+
+# In[17]:
 
 
 # Here I am plotting the amount of applications for each day to see the distribution.
@@ -139,7 +171,7 @@ rejection_rate_df.head()
 date_dist_df.set_index('Date').plot.bar(figsize=(10,10))
 
 
-# In[15]:
+# In[18]:
 
 
 # Here I am plotting the amount of applications for each day of the week to see the distribution.
@@ -147,7 +179,7 @@ date_dist_df.set_index('Date').plot.bar(figsize=(10,10))
 day_dist_df.set_index('DayOfWeek').plot.bar(figsize=(10,10))
 
 
-# In[16]:
+# In[19]:
 
 
 # Here I am plotting the pie chart to see the share of each position I applied for.
@@ -157,7 +189,7 @@ day_dist_df.set_index('DayOfWeek').plot.bar(figsize=(10,10))
 positions_df.set_index('Position').head(15).plot.pie(y='Count', figsize=(10,10))
 
 
-# In[17]:
+# In[20]:
 
 
 # Here I am plotting the pie chart to see the share of each industry of the company I applied for.
@@ -169,17 +201,17 @@ positions_df.set_index('Position').head(15).plot.pie(y='Count', figsize=(10,10))
 industries_df.set_index('Industry').plot.pie(y='Count', figsize=(10,10))
 
 
-# In[18]:
+# In[21]:
 
 
 # Here I am plotting the pie chart to see the the rejection rate for the position I applied for.
 # Further I would be plotting the same thing using Bokeh and it would be interactive, 
 # containing actual values and percentages.
 
-rejection_rate_df.set_index('Answer').plot.pie(y='Count', figsize=(10,10))
+rejection_rate_df.set_index('Rejection').plot.pie(y='Count', figsize=(10,10))
 
 
-# In[19]:
+# In[22]:
 
 
 # Here I am calculating the respective percentages, angles and also putting colors to pass everything to Bokeh.
@@ -199,7 +231,7 @@ positions_b['Color'] = color[:len(positions_b)]
 positions_b.head()
 
 
-# In[20]:
+# In[23]:
 
 
 # Here I am calculating the respective percentages, angles and also putting colors to pass everything to Bokeh.
@@ -211,7 +243,7 @@ industries_b['Color'] = color[:len(industries_b)]
 industries_b.head()
 
 
-# In[21]:
+# In[24]:
 
 
 # Here I am calculating the respective percentages, angles and also putting colors to pass everything to Bokeh.
@@ -223,7 +255,7 @@ rejection_rate_b['Color'] = color[:len(rejection_rate_b)]
 rejection_rate_b.head()
 
 
-# In[22]:
+# In[25]:
 
 
 # Here I am plotting the Bokeh charts using the previously calculated dataframes containing values, percentages and angles.
@@ -233,10 +265,6 @@ from bokeh.io import output_file, show
 from bokeh.plotting import figure
 from bokeh.transform import cumsum
 from bokeh.models import ColumnDataSource, FactorRange, HoverTool
-from datetime import datetime
-
-now = datetime.now()
-current_time = now.strftime("%d.%m.%Y")
 
 output_file("positions_proportion.html")
 
@@ -256,7 +284,7 @@ b_positions.legend.label_text_font_size = "8px"
 show(b_positions)
 
 
-# In[23]:
+# In[26]:
 
 
 # Here I am plotting the Bokeh charts using the previously calculated dataframes containing values, percentages and angles.
@@ -283,7 +311,7 @@ b_industries.grid.grid_line_color = None
 show(b_industries)
 
 
-# In[24]:
+# In[27]:
 
 
 # Here I am plotting the Bokeh charts using the previously calculated dataframes containing values, percentages and angles.
@@ -295,11 +323,11 @@ current_time = now.strftime("%d.%m.%Y")
 output_file("rejection_rate_proportion.html")
 
 b_rejection_rate = figure(plot_height=350, title="Rejection rate ('Yes' for rejection) for the positions I have applied until {}".format(current_time),
-           tools=['hover', 'pan', 'wheel_zoom'], tooltips="@Percentage{%0.2f}: @Count - @Answer", x_range=(-0.5, 1.0))
+           tools=['hover', 'pan', 'wheel_zoom'], tooltips="@Percentage{%0.2f}: @Count - @Rejection", x_range=(-0.5, 1.0))
 
 b_rejection_rate.wedge(x=0, y=1, radius=0.4,
         start_angle=cumsum('Angle', include_zero=True), end_angle=cumsum('Angle'),
-        line_color="white", fill_color='Color', legend_field='Answer', source=rejection_rate_b)
+        line_color="white", fill_color='Color', legend_field='Rejection', source=rejection_rate_b)
 
 b_rejection_rate.axis.axis_label=None
 b_rejection_rate.axis.visible=False
