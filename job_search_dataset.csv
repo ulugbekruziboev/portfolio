@@ -9,7 +9,7 @@
 26.01.2021,Auto1,Data Analyst,Automotive,Berlin,Yes,No,No,No
 28.01.2021,Auto1,Data Analyst,Automotive,Berlin,Yes,No,No,No
 28.01.2021,Zalando,(Junior) Statistical Analyst,Marketplace,Berlin,Yes,No,No,No
-28.01.2021,Forto,Senior Data Analyst,Logistics,Berlin,Yes,No,No,No
+28.01.2021,Forto,Senior Data Analyst,Logistics,Berlin,No,25.02.2021,No,No
 28.01.2021,Gorillas,Junior Data Analyst,Delivery,Berlin,Yes,No,No,No
 28.01.2021,Delivery Hero,(Senior) Data Analyst,Delivery,Berlin,Yes,No,No,No
 28.01.2021,Smoobu,Data Analyst,Software,Berlin,Yes,No,No,No
@@ -48,11 +48,11 @@
 04.02.2021,Bayer,Data Scientist Advanced Analytics,Pharmaceutics,Berlin,Yes,No,No,No
 04.02.2021,Delivery Hero,Product Analyst,Delivery,Berlin,No,19.02.2021,No,No
 04.02.2021,OLX,Data Scientist,Software,Berlin,Yes,No,No,No
-05.02.2021,Audatic,Data Scientist,Machine Learning,Berlin,Yes,No,Very strange assignment,No
+05.02.2021,Audatic,Data Scientist,Machine Learning,Berlin,No,No,Very strange assignment,No
 05.02.2021,Delivery Hero,(Senior) Data Analyst,Delivery,Berlin,Yes,No,No,No
 06.02.2021,Penta,Business Intelligence Analyst,Bank,Berlin,Yes,No,No,No
 08.02.2021,Big Cloud,Data Scientist,Machine Learning,Berlin,Yes,No,No,No
-08.02.2021,Smart Steel Technologies,Data Visualization Specialist,Production,Berlin,Yes,No,BI visualization task,No
+08.02.2021,Smart Steel Technologies,Data Visualization Specialist,Production,Berlin,No,No,BI visualization task,No
 08.02.2021,Taxfix,Data Analyst,Taxes,Berlin,Yes,No,No,No
 08.02.2021,UMI,Data Scientist,Mobility,Berlin,Yes,No,No,No
 09.02.2021,adviqo,Business Intelligence Data Scientist,Media & Tech,Berlin,Yes,No,No,No
@@ -64,7 +64,7 @@
 11.02.2021,Contentful,Data Analyst,Software,Berlin,Yes,No,No,No
 12.02.2021,Lingoda,Data Science Engineer,Online school,Berlin,Yes,No,No,No
 12.02.2021,adsquare,Junior Data Analyst,Marketing,Berlin,Yes,No,No,No
-12.02.2021,Asana Rebel,Junior Data Generalist,Software,Berlin,Yes,No,No,No
+12.02.2021,Asana Rebel,Junior Data Generalist,Software,Berlin,No,09.03.2021,No,No
 12.02.2021,Ecosia,Data Engineer / Analyst,Software,Berlin,Yes,No,No,No
 12.02.2021,Lidl,Data Scientist for Business Analytics,Retail,Berlin,No,25.02.2021,No,No
 12.02.2021,Phiture,Junior Data Analyst,Consulting,Berlin,Yes,No,No,No
@@ -86,3 +86,14 @@
 22.02.2021,Delivery Hero,Senior Data Scientist,Delivery,Berlin,Yes,No,No,No
 22.02.2021,N26,Senior Data Scientist,Bank,Berlin,Yes,No,No,No
 23.02.2021,Harnham,Senior pricing data analyst,Software,Berlin,Yes,No,No,No
+24.02.2021,Harnham,Data Scientist,Software,Berlin,Yes,No,No,No
+24.02.2021,Moyyn,Junior Data Analyst,Software,Berlin,Yes,No,No,No
+24.02.2021,flowkey,Senior Data Analyst,Software,Berlin,Yes,No,No,No
+24.02.2021,Auto1,Data Analyst,Automotive,Berlin,Yes,No,No,No
+25.02.2021,KAYAK,Data Analyst,Software,Berlin,Yes,No,No,No
+25.02.2021,Yara,Data Scientist,Software,Berlin,Yes,No,No,No
+26.02.2021,Delivery Hero,(Senior) Data Scientist,Software,Berlin,Yes,No,No,No
+26.02.2021,Vinted,Data Scientist,Marketplace,Berlin,Yes,No,No,No
+27.02.2021,Basf,Data Analyst,Production,Berlin,Yes,No,No,No
+03.03.2021,Bayer,Commercial Data Scientist,Pharmaceutics,Berlin,Yes,No,No,No
+03.03.2021,Bayer,Data Scientist,Pharmaceutics,Berlin,Yes,No,No,No

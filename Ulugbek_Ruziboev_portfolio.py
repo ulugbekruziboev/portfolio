@@ -196,8 +196,6 @@ positions_df.set_index('Position').head(15).plot.pie(y='Count', figsize=(10,10))
 # Further I would be plotting the same thing using Bokeh and it would be interactive, 
 # containing actual values and percentages.
 
-positions_df.set_index('Position').head(15).plot.pie(y='Count', figsize=(10,10))
-
 industries_df.set_index('Industry').plot.pie(y='Count', figsize=(10,10))
 
 
