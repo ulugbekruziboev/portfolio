@@ -18,7 +18,7 @@ import seaborn as sns
 #Here we are reading the prepared CSV file, and also setting the 'parse_dates' parameter 
 #since we would like to have our dates column to be parsed.
 
-df = pd.read_csv('job_search_dataset.csv', parse_dates=['Date'], dayfirst=True)
+df = pd.read_csv(r"C:\Users\Ulugbek Ruziboev\Personal\Documents\Job search\job_search_dataset.csv", parse_dates=['Date'], dayfirst=True)
 df.head()
 
 
@@ -217,6 +217,10 @@ rejection_rate_df.set_index('Rejection').plot.pie(y='Count', figsize=(10,10))
 from math import pi
 
 from random import randint
+import random
+
+random.seed(30)
+
 color = []
 n = 50
 for i in range(n):
@@ -334,6 +338,37 @@ b_rejection_rate.grid.grid_line_color = None
 #b_positions.legend.label_text_font_size = "8px"
 
 show(b_rejection_rate)
+
+
+# In[28]:
+
+
+#########################################################################################################################
+
+# After all of the data exploration and interpretation step we can start building our machine learning model.
+# Here we go!
+
+#########################################################################################################################
+
+
+# In[29]:
+
+
+# Before actually building any machine learning model we need to prepare any kind of dataset.
+# Some of the parts of data preparation is done already (like getting rid of null values and etc.),
+# but we also need to remember that a machine learning model can learn from numbers only, and,
+# as you might recall, in our case a lot of columns had string values.
+# What can we do at this step? There are different techniques:
+# 1.1. We can manually assign to each string a specific number, i.e. data scientist - 1, data analyst - 2 and etc.
+# 1.2. If we have very little amount of unique string values, the first option might work nice, 
+# but mostly it is too time-consuming and we can use label encoding here. The idea is identical to option 1.
+# 2. A different approach would be one-hot encoding, where we create n number of additional columns (n equals to 
+# the number of unique categories) and put ones where they are true and zero otherwise. 
+# Columns with data scientist would then contain ones and zero for all other types of positions.
+
+# Choosing between these two methods depend solely on the data. Mostly one-hot encoding is used for not ordinal categories,
+# whereas label encoding can be used for ordinal ones. Also, one-hot encoding would be too ineffective if there are
+# too many distinct categories.
 
 
 # In[ ]:
