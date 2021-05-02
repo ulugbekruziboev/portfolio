@@ -52,6 +52,7 @@ df.isnull().all()
 # Here we are adding a new column containing the day of the week for further useful analysis.
 
 df['DayOfWeek'] = df['Date'].dt.day_name()
+df['MonthOfYear'] = df['Date'].dt.month_name()
 df.head()
 
 
@@ -84,20 +85,34 @@ day_dist_df
 # In[8]:
 
 
+# Here we are creating a new dataframe containing the information on the distribution of months of the year to see
+# how many times I applied each month of the year.
+# I am also doing reindexing of the dataframe since it would be sorted based on alphabetical or numeric order,
+# but not the months of the year as they are meant to be.
+
+month_dist_df = df.groupby('MonthOfYear')['Company'].count().reindex(['January', 'February', 
+                                                                  'March', 'April', 'May']).to_frame()
+month_dist_df.reset_index(inplace=True)
+month_dist_df
+
+
+# In[9]:
+
+
 # Here I am counting values for positions to see the distribution of positions I have applied so far.
 
 positions_df = df['Position'].value_counts().to_frame()
 positions_df.reset_index(inplace=True)
 
 
-# In[9]:
+# In[10]:
 
 
 positions_df.columns = ['Position', 'Count']
 positions_df.head()
 
 
-# In[10]:
+# In[11]:
 
 
 # Here I am counting values for industries of companies to see the distribution of industries I have applied so far.
@@ -106,14 +121,14 @@ industries_df = df['Industry'].value_counts().to_frame()
 industries_df.reset_index(inplace=True)
 
 
-# In[11]:
+# In[12]:
 
 
 industries_df.columns = ['Industry', 'Count']
 industries_df.head()
 
 
-# In[12]:
+# In[13]:
 
 
 # Here I am calculating the rejection rate (how many of the companies have sent a rejection mail after I applied).
@@ -122,7 +137,7 @@ rejection_rate_df = df['Rejection'].value_counts().to_frame()
 rejection_rate_df.reset_index(inplace=True)
 
 
-# In[13]:
+# In[14]:
 
 
 # Here 'Yes' would mean that I got rejection, whereas 'No' - went for an interview.
@@ -131,7 +146,47 @@ rejection_rate_df.columns = ['Rejection', 'Count']
 rejection_rate_df.head()
 
 
-# In[14]:
+# In[15]:
+
+
+# Here I am calculating the rejection rate grouped on a montly basis (how many of the companies have sent a rejection mail after I applied).
+
+rejection_rate_monthly_df = df.groupby('MonthOfYear')['Rejection'].value_counts().to_frame()
+rejection_rate_monthly_df.columns = ['Count']
+rejection_rate_monthly_df
+
+
+# In[16]:
+
+
+rejection_rate_monthly_df.reset_index(inplace=True)
+rejection_rate_monthly_df
+
+
+# In[17]:
+
+
+rejection_rate_monthly_df = rejection_rate_monthly_df.reindex([4, 5, 2, 3, 6, 7, 0, 1, 8])
+rejection_rate_monthly_df
+
+
+# In[18]:
+
+
+rejection_rate_monthly_df.set_index('MonthOfYear', inplace=True)
+rejection_rate_monthly_df
+
+
+# In[19]:
+
+
+# A few steps of manipulations to sort the months, since the standard sort can only be alphabetical.
+
+rejection_rate_monthly_df.reset_index(inplace=True)
+rejection_rate_monthly_df
+
+
+# In[20]:
 
 
 #########################################################################################################################
@@ -142,7 +197,7 @@ rejection_rate_df.head()
 #########################################################################################################################
 
 
-# In[15]:
+# In[21]:
 
 
 # Hereby I am extracting current datetime to further include it to create appropriate filenames and etc.
@@ -153,7 +208,7 @@ now = datetime.now()
 current_time = now.strftime("%d.%m.%Y")
 
 
-# In[16]:
+# In[22]:
 
 
 # The first interesting insight follows.
@@ -163,7 +218,7 @@ display('Until {time} I have applied for {job} vacant positions in {industry} in
                                                                                           industry=len(df.Industry.unique())))
 
 
-# In[17]:
+# In[23]:
 
 
 # Here I am plotting the amount of applications for each day to see the distribution.
@@ -171,7 +226,7 @@ display('Until {time} I have applied for {job} vacant positions in {industry} in
 date_dist_df.set_index('Date').plot.bar(figsize=(10,10))
 
 
-# In[18]:
+# In[24]:
 
 
 # Here I am plotting the amount of applications for each day of the week to see the distribution.
@@ -179,7 +234,24 @@ date_dist_df.set_index('Date').plot.bar(figsize=(10,10))
 day_dist_df.set_index('DayOfWeek').plot.bar(figsize=(10,10))
 
 
-# In[19]:
+# In[25]:
+
+
+# Here I am plotting the amount of applications for each month of the year to see the distribution.
+
+month_dist_df.set_index('MonthOfYear').plot.bar(figsize=(10,10))
+
+
+# In[26]:
+
+
+# Here I am plotting the amount of rejections for each month of the year to see the distribution.
+
+fig, ax = plt.subplots(figsize=(10, 10))
+sns.barplot(ax=ax, x="MonthOfYear", y="Count", hue="Rejection", data=rejection_rate_monthly_df)
+
+
+# In[27]:
 
 
 # Here I am plotting the pie chart to see the share of each position I applied for.
@@ -189,7 +261,7 @@ day_dist_df.set_index('DayOfWeek').plot.bar(figsize=(10,10))
 positions_df.set_index('Position').head(15).plot.pie(y='Count', figsize=(10,10))
 
 
-# In[20]:
+# In[28]:
 
 
 # Here I am plotting the pie chart to see the share of each industry of the company I applied for.
@@ -199,7 +271,7 @@ positions_df.set_index('Position').head(15).plot.pie(y='Count', figsize=(10,10))
 industries_df.set_index('Industry').plot.pie(y='Count', figsize=(10,10))
 
 
-# In[21]:
+# In[29]:
 
 
 # Here I am plotting the pie chart to see the the rejection rate for the position I applied for.
@@ -209,7 +281,7 @@ industries_df.set_index('Industry').plot.pie(y='Count', figsize=(10,10))
 rejection_rate_df.set_index('Rejection').plot.pie(y='Count', figsize=(10,10))
 
 
-# In[22]:
+# In[30]:
 
 
 # Here I am calculating the respective percentages, angles and also putting colors to pass everything to Bokeh.
@@ -222,7 +294,7 @@ import random
 random.seed(30)
 
 color = []
-n = 50
+n = 100
 for i in range(n):
     color.append('#%06X' % randint(0, 0xFFFFFF))
 
@@ -233,7 +305,7 @@ positions_b['Color'] = color[:len(positions_b)]
 positions_b.head()
 
 
-# In[23]:
+# In[31]:
 
 
 # Here I am calculating the respective percentages, angles and also putting colors to pass everything to Bokeh.
@@ -245,7 +317,7 @@ industries_b['Color'] = color[:len(industries_b)]
 industries_b.head()
 
 
-# In[24]:
+# In[32]:
 
 
 # Here I am calculating the respective percentages, angles and also putting colors to pass everything to Bokeh.
@@ -257,7 +329,7 @@ rejection_rate_b['Color'] = color[:len(rejection_rate_b)]
 rejection_rate_b.head()
 
 
-# In[25]:
+# In[33]:
 
 
 # Here I am plotting the Bokeh charts using the previously calculated dataframes containing values, percentages and angles.
@@ -286,7 +358,7 @@ b_positions.legend.label_text_font_size = "8px"
 show(b_positions)
 
 
-# In[26]:
+# In[34]:
 
 
 # Here I am plotting the Bokeh charts using the previously calculated dataframes containing values, percentages and angles.
@@ -313,7 +385,7 @@ b_industries.grid.grid_line_color = None
 show(b_industries)
 
 
-# In[27]:
+# In[35]:
 
 
 # Here I am plotting the Bokeh charts using the previously calculated dataframes containing values, percentages and angles.
@@ -340,7 +412,7 @@ b_rejection_rate.grid.grid_line_color = None
 show(b_rejection_rate)
 
 
-# In[28]:
+# In[36]:
 
 
 #########################################################################################################################
@@ -351,7 +423,7 @@ show(b_rejection_rate)
 #########################################################################################################################
 
 
-# In[29]:
+# In[37]:
 
 
 # Before actually building any machine learning model we need to prepare any kind of dataset.
